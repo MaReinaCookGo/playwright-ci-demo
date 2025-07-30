@@ -1,9 +1,6 @@
 // @ts-check
 import { defineConfig, devices } from "@playwright/test";
 
-/**
- * @see https://playwright.dev/docs/test-configuration
- */
 export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
@@ -11,11 +8,15 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
 
-  // ✅ Configura el reporte HTML para CI/CD
-  reporter: [["html", { outputFolder: "playwright-report", open: "never" }]],
+  // 🔹 Configura el login global
+  globalSetup: require.resolve("./global-setup.js"),
 
+  // 🔹 Opciones compartidas para todos los tests
   use: {
-    trace: "on-first-retry",
+    trace: "on",
+    screenshot: "on",
+    video: "retain-on-failure",
+    storageState: "storageState.json", // <- muy importante para login
   },
 
   projects: [
