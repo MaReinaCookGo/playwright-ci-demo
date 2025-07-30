@@ -9,7 +9,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
 
   // 🔹 Configura el login global
-  globalSetup: require.resolve("./global-setup.js"),
+  // globalSetup: require.resolve("./global-setup.js"),
 
   // 🔹 Opciones compartidas para todos los tests
   use: {
